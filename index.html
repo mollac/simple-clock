@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta lang="hu">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>ÓRA</title>
+
+    <style>
+        
+    </style>
+
+    <link rel="stylesheet" href="css/index.css">
+
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="js/nevnapok.js"></script>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="header">
+            PONTOS IDŐ
+        </div>
+
+        <div class="content">
+            <div id="clockbox" class="clock"></div>
+            <p class="nevnap">
+                <script>
+                    var ido = new Date()
+                    var ev = ido.getYear()
+                    if (ev < 2000) ev = ev + 1900
+                    var ho = ido.getMonth() + 1
+                    var nap = ido.getDate()
+                    document.write(havinev(ev, ho, nap));
+                </script>
+            </p>
+            
+        </div>
+        <div class="footer">
+            <div id="datebox"></div>
+        </div>
+    </div>
+
+
+    <script type="text/javascript">
+        var tday = new Array("vasárnap", "hétfő", "kedd", "szerda", "csütörtök", "péntek", "szombat");
+        var tmonth = new Array("Január", "Február", "Március", "Április", "Május", "Június", "Július", "Augusztus", "Szeptember", "Október", "November", "December");
+
+        function GetClock() {
+            var d = new Date();
+            var nday = d.getDay(),
+                nmonth = d.getMonth(),
+                nyear = d.getYear() + 1900,
+                ndate = d.getDate();
+            var nhour = d.getHours(),
+                nmin = d.getMinutes(),
+                nsec = d.getSeconds();
+            if (nhour <= 9) nhour = "0" + nhour;
+            if (nmin <= 9) nmin = "0" + nmin;
+            if (nsec <= 9) nsec = "0" + nsec;
+            document.getElementById('clockbox').innerHTML = nhour + ":" + nmin + ":" + nsec;
+            document.getElementById('datebox').innerHTML = nyear + '. ' + tmonth[nmonth] + " " + ndate + ". " + tday[nday];
+        }
+
+        window.onload = function() {
+            GetClock();
+            setInterval(GetClock, 1000);
+        }
+    </script>
+</body>
+
+</html>
